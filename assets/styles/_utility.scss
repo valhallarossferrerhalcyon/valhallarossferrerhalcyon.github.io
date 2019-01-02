@@ -1,0 +1,107 @@
+// # text modification, padding, margin, spacing, helpers, position, display, touch, colors
+
+//Colors
+$color: primary secondary danger light dark;
+@each $c in $color {
+    .#{$c} { color: map-get($colors, #{$c}); }
+}
+//Display
+$display: block hidden flex inline inline-block;
+@each $d in $display {
+    .#{$d} { display: $display !important; }
+}
+
+//Positioning
+$position: absolute relative sticky fixed;
+@each $pos in $position {
+    .#{$pos}{ position: $pos; }
+}
+@mixin center($position) {
+    position: absolute;
+    @if $position == 'vertical' {
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    @else if $position == 'horizontal' {
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translate(-50%);
+    }
+    @else if $position == 'both' {
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+}
+@mixin push--auto {
+    margin: { 
+        left: auto;
+        right: auto;
+    }
+}
+%push--auto{
+    margin: {
+        left: auto;
+        right: auto;
+    }
+}
+
+//Margin & Padding
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50);
+$sides: (top, bottom, left, right);
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m-#{str-slice($side, 0, 1)}-#{$space} { margin-#{$side}: #{$space}px !important; }
+    .p-#{str-slice($side, 0, 1)}-#{$space} { padding-#{$side}: #{$space}px !important; }
+  }
+  .m-t-#{$space} { margin-top: $space; }
+  .m-r-#{$space} { margin-right: $space; }
+  .m-b-#{$space} { margin-bottom: $space; }
+  .m-l-#{$space} { margin-left: $space; }
+  .p-t-#{$space} { padding-top: $space; }
+  .p-r-#{$space} { padding-right: $space; }
+  .p-b-#{$space} { padding-bottom: $space; }
+  .p-l-#{$space} { padding-left: $space; }
+}
+
+//Text Modification
+$font-sizes: xs sm md lg xl;
+@each $size in $font-sizes {
+    .text-#{$size} { font-size: $size; }
+}
+$font-color: primary secondary;
+@each $f-color in $font-color {
+    .text-#{$f-color} { color: map-get($font-colors, #{$f-color} ); }
+}
+.no-touch {
+    user-select: none;
+    cursor: default;
+    pointer-events: none;
+}
+@mixin truncate-text($lines : 1){
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+//Vendor prefixing
+@mixin prefix($property, $value, $vendors: webkit moz ms o, $default: true) {
+    @if $vendors {
+        @each $vendor in $vendors {
+        #{"-" + $vendor + "-" + $property}: #{$value};
+        }
+    }
+    @if $default {
+        #{$property}: #{$value};
+    }
+    //usage : @include prefix('box-sizing', 'border-box', moz webkit);
+}

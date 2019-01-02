@@ -1,0 +1,31 @@
+// # imports for all mixins and base styles
+
+
+
+// #set icons for the app
+ion-icon[class*="app-svg-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+}
+$icons: user sandals hiking running rubber;
+@each $icon in $icons {
+  ion-icon[class*="app-svg-#{$icon}"] {
+    mask-image: url(../../assets/imgs/icons/svg/#{$icon}.svg);
+  }
+}
+
+//Clearfix
+%clearfix {
+    *zoom: 1;
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
