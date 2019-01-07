@@ -1,6 +1,6 @@
 {
-  "name": "Ionic PWA",
-  "short_name": "Ionic",
+  "name": "Testing Ionic",
+  "short_name": "Test Ionic",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

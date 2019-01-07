@@ -11,7 +11,7 @@ ion-icon[class*="app-svg-"] {
     width: 1em;
     height: 1em;
 }
-$icons: user;
+$icons: user sandals hiking running rubber;
 @each $icon in $icons {
   ion-icon[class*="app-svg-#{$icon}"] {
     mask-image: url(../../assets/imgs/icons/svg/#{$icon}.svg);
